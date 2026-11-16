@@ -5,6 +5,8 @@ import {
   START_EDITING_SERVICE,
   UPDATE_SERVICE,
   RESET_SERVICE_FORM,
+  CHANGE_FILTER,
+  RESET_FILTER,
 } from './actionTypes'
 export function addService(name, price) {
   return { type: ADD_SERVICE, payload: { name, price } }
@@ -27,4 +29,12 @@ export function updateService(id, name, price) {
 
 export function resetServiceForm() {
   return { type: RESET_SERVICE_FORM }
+}
+
+export function changeFilterService(filter) {
+  return { type: CHANGE_FILTER, payload: { filter } }
+}
+
+export function resetFilterService() {
+  return { type: RESET_FILTER }
 }

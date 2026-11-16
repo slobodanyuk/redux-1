@@ -1,16 +1,13 @@
-// import { useEffect, useState, type CSSProperties } from 'react'
-// import './Clock.css'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  removeService,
-  resetServiceForm,
-  startEditingService,
-} from '../actions/actionCreators'
+import { removeService, resetServiceForm, startEditingService } from '../actions/actionCreators'
 
 export default function ServiceList() {
   const items = useSelector(state => state.serviceList)
+  const filter = useSelector(state => state.serviceFilter)
   const editingId = useSelector(state => state.serviceAdd.editingId)
   const dispatch = useDispatch()
+
+  const visibleServices = items.filter(service => service.name.toLowerCase().includes(filter.trim().toLowerCase()))
 
   const handleEdit = service => {
     dispatch(startEditingService(service))
@@ -25,14 +22,10 @@ export default function ServiceList() {
 
   return (
     <ul>
-      {items.map(o => (
+      {visibleServices.map(o => (
         <li key={o.id}>
           {o.name} {o.price}
-          <button
-            type="button"
-            aria-label={`Редактировать ${o.name}`}
-            onClick={() => handleEdit(o)}
-          >
+          <button type="button" aria-label={`Редактировать ${o.name}`} onClick={() => handleEdit(o)}>
             ✎
           </button>
           <button type="button" onClick={() => handleRemove(o.id)}>

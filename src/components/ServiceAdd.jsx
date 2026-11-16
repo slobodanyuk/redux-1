@@ -1,11 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  addService,
-  changeServiceField,
-  resetServiceForm,
-  updateService,
-} from '../actions/actionCreators'
-import './ServiceAdd.css'
+import { addService, changeServiceField, resetServiceForm, updateService } from '../actions/actionCreators'
 
 export default function ServiceAdd() {
   const item = useSelector(state => state.serviceAdd)
@@ -24,6 +18,7 @@ export default function ServiceAdd() {
     }
 
     dispatch(addService(item.name, item.price))
+    dispatch(resetServiceForm())
   }
 
   const handleCancel = () => {

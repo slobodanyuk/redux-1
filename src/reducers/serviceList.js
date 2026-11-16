@@ -15,9 +15,7 @@ export default function serviceListReducer(state = initialState, action) {
       return state.filter(service => service.id !== id)
     case UPDATE_SERVICE: {
       const { id, name, price } = action.payload
-      return state.map(service =>
-        service.id === id ? { ...service, name, price: Number(price) } : service,
-      )
+      return state.map(service => (service.id === id ? { ...service, name, price: Number(price) } : service))
     }
     default:
       return state
